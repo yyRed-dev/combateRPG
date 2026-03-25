@@ -6,6 +6,8 @@ public class Main {
 
     public static void main (String[] args) {
         
+        int rodada = 1;
+
         System.out.println("Bem vindo ao Simulador de Batalhas!\n");
         System.out.println("Para começar, selecione sua classe:");
         System.out.println("1. Barbaro \n2. Druida \n3. Ladino \n4. Mago \n5. Ranger");
@@ -25,9 +27,23 @@ public class Main {
 
         String[] iniciativa = jogarIniciativa(prota, inimigo);
 
+        System.out.println("Teste dano das Magias\n");
+
+        System.out.println("Espada Magica: " + danoMagico(Magias.espadaMagica));
+        System.out.println("Cuspe Acido: " + danoMagico(Magias.cuspeAcido));
+        System.out.println("Raio Congelante: " + danoMagico(Magias.raioCongelante));
+        System.out.println("Bola de Fogo: " + danoMagico(Magias.bolaDeFogo));
+
+
+
+        // para aqui
         while (prota.getHp() > 0 && inimigo.getHp() > 0) {
 
+            System.out.println("Rodada atual: " + rodada+"\n");
+
             ataquesRodada(prota, inimigo, iniciativa);
+            System.out.println("Fim da rodada " + rodada +"\n-----------------\n");
+            rodada++;
         }
 
         quemGanhou(prota, inimigo);
@@ -59,20 +75,34 @@ public class Main {
     }
 
 
-    // metodo para rodada de porrada normal
+    // metodo teste para rodada de porrada normal
     static void ataquesRodada(Classe prota, Classe inimigo, String[] iniciativa) {
 
-        int rodada = 1;
         for (int i=0; i < 2; i++) {
 
             if (iniciativa[0].equals("prota")) {
+
                 ataqueProta(prota, inimigo);
+                if (inimigo.getHp() == 0) {
+                    return;
+                }
+
                 ataqueInimigo(inimigo, prota);
-                rodada++;
+                if (prota.getHp() == 0) {
+                    return;
+                }
+
             } else {
                 ataqueInimigo(inimigo, prota);
+
+                if (prota.getHp() == 0) {
+                    return;
+                }
+
                 ataqueProta(prota, inimigo);
-                rodada++;
+                if (inimigo.getHp() == 0) {
+                    return;
+                }
             }
         }
     }
@@ -152,6 +182,23 @@ public class Main {
         return 0;
     }
 
+
+    // Causar dano magias
+    static int danoMagico(Magias magia) {
+
+    if (magia.getdanoMagia() == 0) {
+        return 0;
+    }
+
+    Random rnd = new Random();
+    int total = 0;
+
+    for (int i = 0; i < magia.getdadosDanoMagia(); i++) {
+        total += rnd.nextInt(magia.getdanoMagia()) + 1;
+    }
+
+    return total;
+}
 
 
 

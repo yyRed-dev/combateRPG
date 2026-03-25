@@ -4,6 +4,7 @@ public class Classe {
     int mod, hp, def;
 
     Armas arma;
+    Habilidades habilidade;
 
     public Classe(String nomeClasse, int mod, int hp, int def, Armas arma) {
         this.nomeClasse = nomeClasse;
@@ -12,6 +13,7 @@ public class Classe {
         this.def = def;
         this.arma = arma;
     }
+
     public Armas getArma() {
         return arma;
     }
@@ -22,7 +24,7 @@ public class Classe {
     static Classe mago = new Classe("Mago", 3, 18, 13, Armas.cajado);
     static Classe ranger = new Classe("Ranger", 3, 22, 16, Armas.arco);
     
-    //metodo que escolhe a classe
+    // metodo que escolhe a classe
     static Classe escolherClasse(int opcao) {
         switch(opcao) {
             case 1:
@@ -40,7 +42,7 @@ public class Classe {
         }
     }
 
-    //getters
+    // getters
     public String getnomeClasse() {
         return nomeClasse;
     }

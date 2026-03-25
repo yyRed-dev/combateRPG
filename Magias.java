@@ -1,3 +1,4 @@
+import java.util.Random;
 public class Magias {
 
     private String nomeMagia;
